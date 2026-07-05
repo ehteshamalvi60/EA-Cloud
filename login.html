@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EA Cloud Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="card">
+
+<h2>EA Cloud Login</h2>
+
+<input type="email" id="email" placeholder="Email">
+
+<input type="password" id="password" placeholder="Password">
+
+<button id="loginBtn">Login</button>
+
+<button id="signupBtn">Sign Up</button>
+
+<p id="msg"></p>
+
+</div>
+</div>
+
+<script type="module">
+
+import { app } from "./firebase.js";
+
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword
+
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+const auth = getAuth(app);
+
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const msg = document.getElementById("msg");
+
+document.getElementById("signupBtn").onclick = async ()=>{
+
+try{
+
+await createUserWithEmailAndPassword(
+auth,
+email.value,
+password.value
+);
+
+msg.innerHTML="✅ Account Created";
+
+}catch(e){
+
+msg.innerHTML=e.message;
+
+}
+
+};
+
+document.getElementById("loginBtn").onclick = async ()=>{
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email.value,
+password.value
+);
+
+window.location="dashboard.html";
+
+}catch(e){
+
+msg.innerHTML=e.message;
+
+}
+
+};
+
+</script>
+
+</body>
+</html>

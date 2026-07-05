@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EA Cloud Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:#161b22;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.box{
+background:#161b22;
+padding:20px;
+border-radius:12px;
+text-align:center;
+}
+
+.logout{
+background:#d73a49;
+margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+<div class="logo">
+☁️ EA Cloud
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="box">
+<h3>Profile</h3>
+<p>Firebase User</p>
+</div>
+
+<div class="box">
+<h3>Storage</h3>
+<p>Coming Soon</p>
+</div>
+
+<div class="box">
+<h3>Settings</h3>
+<p>Coming Soon</p>
+</div>
+
+<div class="box">
+<button class="logout" id="logoutBtn">
+Logout
+</button>
+</div>
+
+</div>
+
+<script type="module">
+
+import { app } from "./firebase.js";
+
+import {
+getAuth,
+signOut
+
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+const auth=getAuth(app);
+
+document.getElementById("logoutBtn").onclick=async()=>{
+
+await signOut(auth);
+
+window.location="login.html";
+
+};
+
+</script>
+
+</body>
+</html>
